@@ -5,6 +5,44 @@ import './App.css';
 
 const socket = io('http://localhost:8000');
 
+const BahrainCircuit = ({ racing }) => (
+  <div style={{width: '100%', height: '160px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative'}}>
+    <img
+      src="/bahrain_circuit.png"
+      alt="Bahrain Circuit"
+      style={{
+        height: '100%',
+        width: '100%',
+        objectFit: 'contain',
+        filter: 'drop-shadow(0 0 12px rgba(0,212,255,0.4))',
+        opacity: 0.9
+      }}
+    />
+    {racing && (
+      <div style={{
+        position: 'absolute',
+        bottom: '8px',
+        right: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '6px',
+        fontSize: '9px',
+        color: '#00ff88',
+        fontFamily: 'monospace',
+        letterSpacing: '2px'
+      }}>
+        <div style={{
+          width: '6px', height: '6px',
+          borderRadius: '50%',
+          background: '#00ff88',
+          animation: 'pulse 0.8s infinite'
+        }}></div>
+        LIVE
+      </div>
+    )}
+  </div>
+);
+
 function App() {
   const [connected, setConnected] = useState(false);
   const [racing, setRacing] = useState(false);
@@ -159,7 +197,7 @@ function App() {
   return (
     <div className="app">
       <div className="header">
-        <h1>F1 Race Engineer AI</h1>
+      <h1>PitWall AI</h1>
         <div className="header-right">
           <div className="status">
             <span className={`dot ${connected ? 'green' : 'red'}`}></span>
@@ -180,6 +218,45 @@ function App() {
             </div>
             <div className="lap-progress">
               <div className="lap-progress-bar" style={{ width: `${progress}%` }}></div>
+            </div>
+          </div>
+
+          {/* CIRCUIT + STATS — always visible */}
+          <div className="circuit-row">
+            <div className="circuit-card">
+              <div className="circuit-title">
+                <span>Bahrain International Circuit</span>
+                <span className="circuit-sub">Round 1 · 2023 · 57 Laps</span>
+              </div>
+              <div className="circuit-svg">
+                <BahrainCircuit racing={racing} />
+              </div>
+            </div>
+            <div className="circuit-stats">
+              <div className="cstat">
+                <div className="cstat-label">Circuit Length</div>
+                <div className="cstat-value">5.412 <span>km</span></div>
+              </div>
+              <div className="cstat">
+                <div className="cstat-label">Race Distance</div>
+                <div className="cstat-value">308.238 <span>km</span></div>
+              </div>
+              <div className="cstat">
+                <div className="cstat-label">DRS Zones</div>
+                <div className="cstat-value">3 <span>zones</span></div>
+              </div>
+              <div className="cstat">
+                <div className="cstat-label">Pit Loss</div>
+                <div className="cstat-value">22 <span>sec</span></div>
+              </div>
+              <div className="cstat">
+                <div className="cstat-label">Race Winner</div>
+                <div className="cstat-value" style={{fontSize: '14px', color: '#ffd93d'}}>VER 🏆</div>
+              </div>
+              <div className="cstat">
+                <div className="cstat-label">Fastest Lap</div>
+                <div className="cstat-value" style={{fontSize: '14px', color: '#c084fc'}}>PER 💜</div>
+              </div>
             </div>
           </div>
 
