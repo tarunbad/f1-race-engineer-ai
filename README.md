@@ -1,4 +1,4 @@
-# 🏎️ F1 Race Engineer AI
+# 🏎️ PitWall AI
 
 An AI-powered race engineer that monitors live F1 telemetry, detects strategy conflicts, and communicates like a real pit wall engineer — solving the breakdown between drivers and engineers that costs teams race wins.
 
